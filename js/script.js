@@ -10,36 +10,23 @@ while (correctNumbers.length < 5) {
     // Genero un numero random 
     let newNumber = getRndInteger(0, 100);
 
-    // Verifico se è gia presente nell' array 
-    let numberFound = false;
-    
-    correctNumbers.forEach((element) => {
-        if (newNumber !== element) {
-            numberFound = false;
-        } else {
-            numberFound = true;
-        }
-    }); 
-
-    // Se no lo pusho, se si, non lo pusho 
-    if (!numberFound) {
+    if (!correctNumbers.includes(newNumber)) {
         correctNumbers.push(newNumber);
-    } 
+    }
 }
 
 console.log(correctNumbers); //test 
 
 // Creo un alert per ogni numero
 correctNumbers.forEach((element) => {
-    userMessage = `
-    Simon says: ${element}
-    `;
-
-    alert(userMessage);
+    alert(`Simon says: ${element}`);
 });
 
 // Creo l' array per raccogliere i numeri dell' utente 
 const userNumbersArray = [];
+
+// Creo l' array matchedNumbers 
+const matchedNumbers = [];
 
 // Ora dichiaro la funzione con i prompt che partirà tra 30 secondi 
 setTimeout( function () {
@@ -48,25 +35,31 @@ setTimeout( function () {
     while (userNumbersArray.length < 5) {
         let userNumber = parseInt( prompt('Dimmi uno dei cinque numeri'));
 
-        // Verifico se è gia presente nell' array 
-        let numberFound = false;
-    
-        userNumbersArray.forEach((element) => {
-            if (userNumber !== element) {
-            numberFound = false;
-            } else {
-            numberFound = true;
-            }
-        }); 
+        if (!userNumbersArray.includes(userNumber)) {
+            userNumbersArray.push(userNumber)
+        } 
 
-        // Se no lo pusho, se si, non lo pusho 
-        if (!numberFound) {
-        userNumbersArray.push(userNumber);
-        };
+        // Ora confronto ognni numero del userNumbersArray con quelli del correctNumbers
+        // e dico quanti e quali dei numeri da indovinare sono stati individuati
+        userNumbersArray.forEach((singleUserNumber) => {
+            // Verifico se è gia presente nell' array 
+            if (correctNumbers.includes(singleUserNumber)) {
+                if (!matchedNumbers.includes(singleUserNumber)) {
+                    matchedNumbers.push(singleUserNumber);
+                }       
+            }
+        });  
     } 
+
+    console.log('userNumber' + userNumbersArray); //test
+    console.log('azzeccati' + matchedNumbers); //test
+    alert(`Hai azzeccato ${matchedNumbers.length} e sono: ${matchedNumbers}`);
+    
 }, 2000);
 
-console.log(userNumbersArray); //test
+
+
+// CORREGGI USANDO INCLLUDES E FILTER E TRASFORMA IN FFUNZIONI DOVE POSSIBILE
 
 
 
