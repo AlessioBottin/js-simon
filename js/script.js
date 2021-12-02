@@ -43,10 +43,8 @@ setTimeout( function () {
         // e dico quanti e quali dei numeri da indovinare sono stati individuati
         userNumbersArray.forEach((singleUserNumber) => {
             // Verifico se è gia presente nell' array 
-            if (correctNumbers.includes(singleUserNumber)) {
-                if (!matchedNumbers.includes(singleUserNumber)) {
-                    matchedNumbers.push(singleUserNumber);
-                }       
+            if (correctNumbers.includes(singleUserNumber) && !matchedNumbers.includes(singleUserNumber)) {
+                matchedNumbers.push(singleUserNumber);
             }
         });  
     } 
